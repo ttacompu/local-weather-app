@@ -11,7 +11,7 @@ jobs:
             - v1-dependencies-{{ checksum "package-lock.json" }}
       - run: npm ci
       # force update the webdriver
-      - run: npm i webdrivermanager@latest
+      # run: npm i webdrivermanager@latest
       # because we use "npm ci" to install NPM dependencies
       # we cache "~/.npm" folder
       - save_cache:
@@ -23,7 +23,7 @@ jobs:
       - run: npm run ngcc
       - run: npm run build:prod
       - run: npm run test:coverage -- --watch=false
-      - run: npm run e2e
+      # - run: npm run e2e
       - run: npm run test:a11y:ci
       - run:
           name: Tar & Gzip compiled app
