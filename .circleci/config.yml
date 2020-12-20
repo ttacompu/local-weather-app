@@ -20,6 +20,7 @@ jobs:
             - ~/.npm
       # run: npm run style
       # run: npm run lint
+      - run: npm run ngcc
       - run: npm run build:prod
       - run: npm run test:coverage -- --watch=false
       - run: npm run e2e

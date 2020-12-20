@@ -20,7 +20,8 @@
     "prenow:publish": "npm run build:prod",
     "now:publish": "now --platform-version 2 dist/local-weather-app",
     "test:a11y": "pa11y --standard Section508 http://localhost:5000",
-    "test:a11y:ci": "pa11y-ci"
+    "test:a11y:ci": "pa11y-ci",
+    "ngcc": "ngcc --properties es2015 browser module main --async false"
   },
   "private": true,
   "dependencies": {
@@ -31,7 +32,7 @@
     "@angular/core": "~9.0.1",
     "@angular/flex-layout": "^11.0.0-beta.33",
     "@angular/forms": "~9.0.1",
-    "@angular/material": "~9.0.1",
+    "@angular/material": "~9.1.1",
     "@angular/platform-browser": "~9.0.1",
     "@angular/platform-browser-dynamic": "~9.0.1",
     "@angular/router": "~9.0.1",
