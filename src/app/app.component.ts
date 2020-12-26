@@ -1,4 +1,7 @@
 import { Component } from '@angular/core'
+import { Subscription } from 'rxjs'
+
+import { WeatherService } from './services/weather.service'
 
 @Component({
   selector: 'app-root',
@@ -12,6 +15,10 @@ import { Component } from '@angular/core'
         <div class="mat-caption vertical-margin">
           Your city, your forecast, right now!
         </div>
+      </div>
+
+      <div fxLayoutAlign="center">
+        <app-city-search></app-city-search>
       </div>
 
       <div fxLayout="row">
@@ -37,4 +44,11 @@ import { Component } from '@angular/core'
 })
 export class AppComponent {
   title = 'LocalCast Weather'
+
+
+  constructor() {}
+
+  ngOnDestroy() {
+
+  }
 }

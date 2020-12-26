@@ -8,10 +8,4 @@ export const fakeWetherModel = {
   temperature: 32,
   description: 'cold',
 }
-export class WeatherFakeService {
-  constructor() {}
 
-  getCurrentWeather(city, country): Observable<any> {
-    return of(fakeWetherModel)
-  }
-}

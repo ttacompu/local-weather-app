@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   appId: '79c422a68df58422a1fd1860fe885876',
+  userName : 'ttacompu',
   baseUrl: 'http://',
+  geonamesApi : 'api'
 }
 
 /*

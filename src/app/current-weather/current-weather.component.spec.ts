@@ -1,9 +1,11 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { Component } from '@angular/core'
 import { ComponentFixture, TestBed, async } from '@angular/core/testing'
-import { injectSpy } from 'angular-unit-test-helper'
-import { of } from 'rxjs'
+import { ObservablePropertyStrategy, autoSpyObj, injectSpy } from 'angular-unit-test-helper'
+import { Observable } from 'rxjs'
+import { BehaviorSubject, of } from 'rxjs'
 
+import { MaterialModule } from '../material.module'
 import { WeatherService } from '../services/weather.service'
 import { fakeWetherModel } from '../services/weatherFake.service'
 import { CurrentWeatherComponent } from './current-weather.component'
@@ -13,18 +15,21 @@ describe('CurrentWeatherComponent', () => {
   let fixture: ComponentFixture<CurrentWeatherComponent>
   let weatherServiceMock: jasmine.SpyObj<WeatherService>
 
-  beforeEach(async(() => {
-    const weatherServiceSpy = jasmine.createSpyObj('WeatherService', [
-      'getCurrentWeather',
-    ])
+  beforeEach(async( ()=>{
+    const weatherServiceSpy = autoSpyObj(
+      WeatherService,
+      ['currentWeather$'],
+      ObservablePropertyStrategy.BehaviorSubject
+    )
 
     TestBed.configureTestingModule({
       declarations: [CurrentWeatherComponent],
-      imports: [HttpClientTestingModule],
+      imports: [MaterialModule],
       providers: [{ provide: WeatherService, useValue: weatherServiceSpy }],
     }).compileComponents()
 
     weatherServiceMock = injectSpy(WeatherService)
+
   }))
 
   beforeEach(() => {
@@ -36,11 +41,5 @@ describe('CurrentWeatherComponent', () => {
     weatherServiceMock.getCurrentWeather.and.returnValue(of(fakeWetherModel))
     fixture.detectChanges()
     expect(component).toBeTruthy()
-  })
-
-  it('current object should same value as Model', () => {
-    weatherServiceMock.getCurrentWeather.and.returnValue(of(fakeWetherModel))
-    fixture.detectChanges()
-    expect(component.current.city).toEqual(fakeWetherModel.city)
   })
 })
